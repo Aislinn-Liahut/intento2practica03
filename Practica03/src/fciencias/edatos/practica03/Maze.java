@@ -235,14 +235,14 @@ public class Maze{
                 // if(actual.fila== 0)
                 //     break;
                 //actual.fila += 1;
-                int auxf= actual.fila;
+               // int auxf= actual.fila;
                 if (actual.fila != 0 && (tablero[actual.fila+1][actual.columna].wall == false) && (tablero[actual.fila+1][actual.columna].visited == false)){
                     
                    // actual.fila += 1;
                 //    auxf += 1;
                     actual = tablero[actual.fila+1][actual.columna];
                 //    actual.fila = auxf;
-                     tablero[actual.fila+1][actual.columna] = actual.fila;
+                     //tablero[actual.fila+1][actual.columna] = actual.fila;
                 //    tablero[actual.fila+1][actual.columna].columna = actual.columna; 
                     return;
                 } 
@@ -274,7 +274,7 @@ public class Maze{
                 //     break;
                 // }
                 if(actual.columna != 0  && tablero[actual.fila][actual.columna-1].wall== false && tablero[actual.fila-1][actual.columna].visited == false ){
-              //  actual = tablero[actual.fila-1][actual.columna];
+                actual = tablero[actual.fila][actual.columna-1];
                // actual.
                 return;
 
@@ -318,6 +318,7 @@ public class Maze{
     public TDAStack<Box> solve(Maze laberinto){
         TDAStack<Box> camino = new Stack<>();
         actual = laberinto.inicio;
+        actual.visit();
         camino.push(actual);
           /* if(actual==null){
             System.out.println("aaaa");
@@ -330,13 +331,15 @@ public class Maze{
             if(laberinto.isExtensible()){
                 
                 laberinto.extend();
-                actual.visit();
+                
                 camino.push(actual);
+                actual.visit();
             
             }
 
-            if(!laberinto.isExtensible()){
-                actual= camino.pop();
+            if(!laberinto.isExtensible() ){
+               camino.pop();
+               actual=camino.top();
 
             }
 
